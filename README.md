@@ -29,46 +29,49 @@ npm install yup @hookform/resolvers
 
 ## Tâches à réaliser
 
-### Niveau 1 - Configuration de base et Authentification
+### Niveau 1 - Configuration des écrans et de la navigation
 
 - [ ] Configuration du projet et installation des dépendances
 - [ ] Mise en place de la navigation (Stack et Tab)
-- [ ] Création des écrans de base (Login, Register, Home)
-- [ ] Implémentation de l'authentification (login/register)
-- [ ] Gestion du stockage du token avec AsyncStorage
-- [ ] Configuration d'Axios pour les appels API
 
-### Niveau 2 - Liste des Salles et Détails
+### Niveau 2 - Premier appel API
+
+- [ ] Configuration des appels API pour les salles de classe
+- [ ] Affichage de la liste des classes
+
+### Niveau 3 - Authentification
+
+- [ ] Création des écrans de base (Login, Register)
+- [ ] Implémentation de l'authentification (login/register)
+
+### Niveau 4 - Context
+
+- [ ] Création d'un context pour l'authentification
+- [ ] Gestion du stockage du token avec AsyncStorage
+
+### Niveau 5 - Profil utilisateur
+
+- [ ] Création de l'écran de profil
+- [ ] Affichage des informations de l'utilisateur
+- [ ] Possibilité de modifier ses informations
+
+### Niveau 6 - Apparence et fonctionnalités avancées
 
 - [ ] Création du composant Card pour les salles
-- [ ] Implémentation de la liste des salles avec pagination
-- [ ] Ajout des filtres de recherche
 - [ ] Création de l'écran de détails d'une salle
-- [ ] Affichage des disponibilités
+- [ ] Afficher la liste des réservations pour une salle
+- [ ] Ajouter un bouton pour réserver une salle
 
-### Niveau 3 - Système de Réservation
+### Niveau 7 - Gestion des réservations pour l'utilisateur
 
-- [ ] Création du formulaire de réservation
-- [ ] Validation des dates et heures
-- [ ] Gestion des conflits de réservation
-- [ ] Confirmation de réservation
-- [ ] Notification de succès/erreur
+- [ ] Création de l'écran de gestion des réservations
+- [ ] Affichage des réservations en cours et passées
+- [ ] Possibilité de supprimer une réservation
 
-### Niveau 4 - Gestion du Profil
+### Niveau 8 - Amélioration de l'expérience utilisateur
 
-- [ ] Création de l'écran profil utilisateur
-- [ ] Affichage des informations personnelles
-- [ ] Modification des informations du profil
-- [ ] Liste des réservations en cours
-- [ ] Historique des réservations
-
-### Niveau 5 - Fonctionnalités Avancées
-
-- [ ] Système de favoris pour les salles
-- [ ] Notifications push pour les réservations
-- [ ] Système de notation et commentaires
-- [ ] Partage de réservation
-- [ ] Mode hors ligne avec synchronisation
+- [ ] Ajout de la possibilité de filtrer les salles (par nom, par capacité, etc.)
+- [ ] Ajout la possibilité de réordonner les salles dans la liste (par nom, par capacité, etc.)
 
 ## Endpoints d'API
 
