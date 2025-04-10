@@ -1,14 +1,63 @@
+import { useContext, useState } from "react";
 import { Text, View } from "react-native";
+import { Button, TextInput } from "react-native-paper";
+import AuthContext from "../context/AuthContext";
 
 const SigninScreen = () => {
+  const { signin } = useContext(AuthContext);
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (key: string, value: string) => {
+    setCredentials({ ...credentials, [key]: value });
+  };
+
   //  handlesubmit
+  const handleSubmit = async () => {
+    console.log(credentials);
+
+    const response = await fetch("http://localhost:8000/api/auth/signin", {
+      method: "POST",
+      body: JSON.stringify(credentials),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
+    console.log("handleSubmit data", data);
+    signin(data);
+  };
+
   return (
-    <View>
+    <View
+      style={{
+        display: "flex",
+        gap: 10,
+        padding: 20,
+      }}
+    >
       <Text>Sign Screen</Text>
 
       {/* input email */}
+      <TextInput
+        label="Email"
+        value={credentials.email}
+        onChangeText={(value) => handleChange("email", value)}
+      />
       {/* input password */}
+      <TextInput
+        label="Password"
+        value={credentials.password}
+        secureTextEntry={true}
+        onChangeText={(value) => handleChange("password", value)}
+      />
       {/* submit button */}
+      <Button onPress={handleSubmit} mode="contained">
+        Signin
+      </Button>
     </View>
   );
 };
