@@ -9,16 +9,8 @@ interface AuthContextProviderProps {
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [user, setUser] = useState(null);
 
-  const signin = (userData: any) => {
-    setUser(userData);
-  };
-
-  const signout = () => {
-    setUser(null);
-  };
-
   return (
-    <AuthContext.Provider value={{ user, signin, signout }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

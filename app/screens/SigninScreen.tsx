@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Text, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import AuthContext from "../context/AuthContext";
+import useAuth from "../hooks/useAuth";
 
 const SigninScreen = () => {
-  const { signin } = useContext(AuthContext);
+  const { signin } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -16,19 +16,7 @@ const SigninScreen = () => {
 
   //  handlesubmit
   const handleSubmit = async () => {
-    console.log(credentials);
-
-    const response = await fetch("http://localhost:8000/api/auth/signin", {
-      method: "POST",
-      body: JSON.stringify(credentials),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    console.log("handleSubmit data", data);
-    signin(data);
+    await signin(credentials);
   };
 
   return (
