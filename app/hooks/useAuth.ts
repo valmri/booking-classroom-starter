@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import AuthService from "../services/auth.service";
 import AuthContext from "../context/AuthContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { removeToken, saveToken } from "../utils/token-jwt";
 
 const useAuth = () => {
