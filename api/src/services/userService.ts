@@ -1,6 +1,6 @@
 import prisma from "../lib/prisma";
 import { hashPassword } from "../utils/password";
-import { CreateUserInput } from "../schemas/userSchema";
+import { CreateUserInput, UpdateUserInput } from "../schemas/userSchema";
 
 export class UserService {
   static async createUser(data: CreateUserInput) {
@@ -70,6 +70,37 @@ export class UserService {
   static async getCurrentUser(userId: number) {
     return prisma.user.findUnique({
       where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+  }
+
+  static async updateUser(id: number, data: UpdateUserInput) {
+    // Vérifier si l'utilisateur existe
+    const existingUser = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      throw new Error("Utilisateur non trouvé");
+    }
+
+    // Si un nouveau mot de passe est fourni, le hasher
+    const updateData = { ...data };
+    if (data.password) {
+      updateData.password = await hashPassword(data.password);
+    }
+
+    // Mettre à jour l'utilisateur
+    return prisma.user.update({
+      where: { id },
+      data: updateData,
       select: {
         id: true,
         email: true,

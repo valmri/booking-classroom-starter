@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Text, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
@@ -11,7 +12,6 @@ const SigninScreen = () => {
   });
 
   const [error, setError] = React.useState(null);
-
   const handleChange = (key: string, value: string) => {
     setCredentials({ ...credentials, [key]: value });
   };
