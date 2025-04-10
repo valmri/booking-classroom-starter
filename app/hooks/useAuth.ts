@@ -14,7 +14,11 @@ const useAuth = () => {
     }
   };
 
-  return { user, signin };
+  const signout = async () => {
+    setUser(null);
+  };
+
+  return { user, signin, signout };
 };
 
 export default useAuth;

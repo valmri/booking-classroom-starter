@@ -26,8 +26,8 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator initialRouteName="Profil" screenOptions={screenOptions}>
       <Tab.Screen name="Classrooms" component={ClassroomsScreen} />
-      <Tab.Screen name="Profil" component={ProfilScreen} />
       <Tab.Screen name="Reservations" component={ReservationsScreen} />
+      <Tab.Screen name="Profil" component={ProfilScreen} />
     </Tab.Navigator>
   );
 };
