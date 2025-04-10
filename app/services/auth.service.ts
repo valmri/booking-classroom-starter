@@ -3,10 +3,7 @@ import api from "./api.service";
 const ENDPOINT = "/auth/signin";
 
 const signin = async (credentials: any) => {
-  const response = await api.post(ENDPOINT, {
-    method: "POST",
-    body: JSON.stringify(credentials),
-  });
+  const response = await api.post(ENDPOINT, credentials);
 
   return response.data;
 };
