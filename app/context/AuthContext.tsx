@@ -1,4 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getToken, removeToken } from "../utils/token-jwt";
+import UserService from "../services/user.service";
 
 const AuthContext = createContext({});
 
@@ -9,6 +13,26 @@ interface AuthContextProviderProps {
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [user, setUser] = useState(null);
 
+  const initializeAuth = async () => {
+    const token = await getToken();
+    if (token) {
+      try {
+        const user = await UserService.getUserWithToken(token);
+        setUser(user);
+      } catch (error) {
+        console.error(error);
+        setUser(null);
+        removeToken();
+      }
+    } else {
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    initializeAuth();
+  }, []);
+
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}
@@ -16,5 +40,5 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   );
 };
 
-export default AuthContext;
 export { AuthContextProvider };
+export default AuthContext;
