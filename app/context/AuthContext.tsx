@@ -9,7 +9,6 @@ interface AuthContextProviderProps {
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [user, setUser] = useState(null);
 
-
   const signin = (userData: any) => {
     setUser(userData);
   };
@@ -18,9 +17,12 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     setUser(null);
   };
 
+  const signup = (userData: any) => {
+    setUser(userData);
+  };
+
   return (
     <AuthContext.Provider value={{ user, signin, signout }}>
-
       {children}
     </AuthContext.Provider>
   );
@@ -28,4 +30,3 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
 export default AuthContext;
 export { AuthContextProvider };
-

@@ -2,9 +2,12 @@ import { Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import useAuth from "../hooks/useAuth";
 import UserForm from "../components/user/UserForm";
+import { useEffect } from "react";
 
 const ProfilScreen = () => {
   const { signout } = useAuth();
+
+  useEffect(() => {}, []);
 
   return (
     <View style={{ padding: 20 }}>

@@ -1,8 +1,8 @@
-
 import React, { useContext, useState } from "react";
 import { Text, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import AuthContext from "../context/AuthContext";
+import AuthService from "../services/auth.service";
 
 const SigninScreen = () => {
   const { signin }: any = useContext(AuthContext);
@@ -18,16 +18,14 @@ const SigninScreen = () => {
 
   const handlesubmit = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
+      const data = await AuthService.signin(credentials);
+      signin({
+        token: data.token,
+        id: data.user.id,
+        email: data.user.email,
+        name: data.user.name,
+        role: data.user.role,
       });
-
-      const data = await response.json();
-      signin(data);
     } catch (error) {
       console.error("Error signing in:", error);
     }
@@ -52,7 +50,7 @@ const SigninScreen = () => {
       />
 
       <Button onPress={handlesubmit} mode="contained">
-        Connexion
+        Sign in
       </Button>
     </View>
   );
