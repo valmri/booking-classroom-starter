@@ -1,13 +1,16 @@
 import { Children, createContext, useState } from "react";
 
-const AuthContext = createContext({});
+const AuthContext = createContext({
+  user: null,
+  setUser: (_user: any) => {},
+});
 
 interface AuthContextProviderProps {
   children: React.ReactNode;
 }
 
 const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser]: any = useState(null);
 
   const signin = (userData: any) => {
     setUser(userData);
@@ -22,7 +25,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, signin, signout }}>
+    <AuthContext.Provider value={{ user, setUser, signin, signout }}>
       {children}
     </AuthContext.Provider>
   );

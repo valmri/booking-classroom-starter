@@ -11,7 +11,7 @@ const ProfilScreen = () => {
 
   return (
     <View style={{ padding: 20 }}>
-      <Text>Profil</Text>
+      <Text>Edit profil</Text>
 
       <UserForm />
 
