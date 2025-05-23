@@ -1,34 +1,47 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { Card } from "react-native-paper";
+import { Card, Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const ClassroomsScreen = () => {
   const [classrooms, setClassrooms] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    console.log("ClassroomsScreen useEffect");
     fetchAllClassrooms();
   }, []);
 
   const fetchAllClassrooms = async () => {
-    const response = await fetch("http://localhost:8000/api/classrooms");
-    const data = await response.json();
-    console.log(data);
-    setClassrooms(data);
+    try {
+      const response = await fetch("http://localhost:8000/api/classrooms");
+      const data = await response.json();
+      setClassrooms(data);
+    } catch (error) {
+      console.error("Erreur lors du chargement des salles :", error);
+    }
+  };
+
+  const handleSeeMore = (classroom: any) => {
+    navigation.navigate("ClassroomDetails", { classroom });
   };
 
   return (
-    <View>
-      <View style={styles.classroomsContainer}>
-        {classrooms.map((classroom) => (
-          <Card key={classroom.id}>
-            <Card.Title title={classroom.name} titleStyle={styles.cardTitle} />
-            <Card.Content>
-              <Text>{classroom.capacity}</Text>
-            </Card.Content>
-          </Card>
-        ))}
-      </View>
+    <View style={styles.classroomsContainer}>
+      {classrooms.map((classroom) => (
+        <Card
+          key={classroom.id}
+          onPress={() => handleSeeMore(classroom)}
+          style={{ marginBottom: 12 }}
+        >
+          <Card.Title title={classroom.name} titleStyle={styles.cardTitle} />
+          <Card.Content>
+            <Text>Capacité : {classroom.capacity}</Text>
+          </Card.Content>
+          <Card.Actions>
+            <Button onPress={() => handleSeeMore(classroom)}>See more</Button>
+          </Card.Actions>
+        </Card>
+      ))}
     </View>
   );
 };
@@ -36,15 +49,8 @@ const ClassroomsScreen = () => {
 export default ClassroomsScreen;
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "blue",
-  },
   classroomsContainer: {
-    flexDirection: "column",
-    gap: 10,
-    padding: 10,
+    padding: 16,
   },
   cardTitle: {
     fontSize: 16,

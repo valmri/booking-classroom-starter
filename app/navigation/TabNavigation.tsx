@@ -3,6 +3,7 @@ import ProfilScreen from "../screens/ProfilScreen";
 import ReservationsScreen from "../screens/ReservationsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import ClassroomsStack from "./ClassroomsStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ const TabNavigation = () => {
 
   return (
     <Tab.Navigator initialRouteName="Profil" screenOptions={screenOptions}>
-      <Tab.Screen name="Classrooms" component={ClassroomsScreen} />
+      <Tab.Screen name="Classrooms" component={ClassroomsStack} />
       <Tab.Screen name="Reservations" component={ReservationsScreen} />
       <Tab.Screen name="Profil" component={ProfilScreen} />
     </Tab.Navigator>
